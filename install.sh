@@ -51,9 +51,34 @@ until [ "$selection" = "e" ]; do
 	echo "service restart_leds" >> /jffs/scripts/ledson.sh;;
 
 	5 ) wget -c -O /jffs/configs/Equifax_Secure_Certificate_Authority.pem http://www.geotrust.com/resources/root_certificates/certificates/Equifax_Secure_Certificate_Authority.pem --no-check-certificate
-	wget;;
+	rm /jffs/scripts/wlan-start
+	wget -c -O /jffs/scripts/wlan-start http://github.com/rallegade/Install-script-asus-ac87u/releases/download/v1/wan-start --no-check-certificate
+
+	echo ""
+	echo -n "Enter the mail the router uses"
+	echo ""
+	read router_email
+	sed -i "s/your-gmail-address/${router_email}/g" /jffs/scripts/wlan-start
+
+        echo ""
+        echo -n "Enter the the username for the mail the router uses"
+        echo ""
+        read router_username
+	sed -i "s/your-gmail-username/${router_username}/g" /jffs/scripts/wlan-start
+
+        echo ""
+        echo -n "Enter the password for the mail the router uses"
+        echo ""
+        read router_pass
+	sed -i "s/your-gmail-password/${router_pass}/g" /jffs/scripts/wlan-start
+
+        echo ""
+        echo -n "Enter the mail you want to recieve these mails on"
+        echo ""
+        read your_email
+	sed -i "s/your-email-address/${your_email}/g" /jffs/scripts/wlan-start;;
 
         e ) exit ;;
-        * ) echo "Please enter 1, 2, 3, or e"; press_enter
+        * ) echo "Please enter 1, 2, 3, 4, 5, or e"; press_enter
     esac
 done
