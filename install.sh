@@ -1,7 +1,6 @@
 #!/bin/sh
 #This is my personal installation script for when setting up my asus ac87u router with merlinwrt
 
-function press_enter
 {
     echo ""
     echo -n "Press Enter to continue"
