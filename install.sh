@@ -30,12 +30,26 @@ until [ "$selection" = "e" ]; do
 	./entware-ngu-setup.sh ;;
 
         2 ) curl -O www.ab-solution.info/releases/beta/ab-solution.sh
-	sh ab-solution.sh;;
+        cp /jffs/scripts/post-mount /jffs/scripts/post-mount-backup
+        rm /jffs/scripts/post-mount
+	sh ab-solution.sh
+{
+    echo ""
+    echo -n "Press Enter to continue"
+    read
+}
+	sed '1d' /jffs/scripts/post-mount
+	cat /jffs/scripts/post-mount-backup /jffs/scripts/post-mount >> /jffs/scripts/post-mount-tmp
+	rm /jffs/scripts/post-mount
+	mv /jffs/scripts/post-mount-tmp /jffs/scripts/post-mount
+	chmod a+rx /jffs/scripts/*;;
 
 	3 ) opkg install dnscrypt-proxy fake-hwclock
 	echo "no-resolv" > /jffs/configs/dnsmasq.conf.add
 	echo "server=127.0.0.1#65053" >> /jffs/configs/dnsmasq.conf.add
-	echo "/opt/etc/init.d/S09dnscrypt-proxy start" >> /jffs/scripts/services-start;;
+	echo "/opt/etc/init.d/S09dnscrypt-proxy start" >> /jffs/scripts/services-start
+	service restart_dnsmasq
+	/opt/etc/init.d/S09dnscrypt-proxy start;;
 
 	4 ) echo 'cru a lightsoff "0 18 * * * /jffs/scripts/ledsoff.sh"' >> /jffs/scripts/services-start
 	echo 'cru a lightson "0 6 * * * /jffs/scripts/ledson.sh"' >> /jffs/scripts/services-start
