@@ -8,6 +8,7 @@
     clear
 }
 
+#Install menu
 selection=
 until [ "$selection" = "e" ]; do
     echo ""
@@ -24,12 +25,15 @@ until [ "$selection" = "e" ]; do
     read selection
     echo ""
     case $selection in
+    
+	#Installs Entware
         1 ) cd /tmp
 	wget -c -O entware-ngu-setup.sh http://goo.gl/hshQkA
 	chmod +x ./entware-ngu-setup.sh
 	./entware-ngu-setup.sh ;;
 
-        2 ) curl -O www.ab-solution.info/releases/beta/ab-solution.sh
+	#Installs AB-Solutions adblocker and takes care of the post-mount script
+        2 ) curl -O www.ab-solution.info/releases/latest/ab-solution.sh
         cp /jffs/scripts/post-mount /jffs/scripts/post-mount-backup
         rm /jffs/scripts/post-mount
 	sh ab-solution.sh
@@ -44,6 +48,7 @@ until [ "$selection" = "e" ]; do
 	mv /jffs/scripts/post-mount-tmp /jffs/scripts/post-mount
 	chmod a+rx /jffs/scripts/*;;
 
+	#Installs dns-crypt on the router
 	3 ) opkg install dnscrypt-proxy fake-hwclock
 	echo "no-resolv" > /jffs/configs/dnsmasq.conf.add
 	echo "server=127.0.0.1#65053" >> /jffs/configs/dnsmasq.conf.add
@@ -51,7 +56,8 @@ until [ "$selection" = "e" ]; do
 	service restart_dnsmasq
 	/opt/etc/init.d/S09dnscrypt-proxy start;;
 
-	4 ) echo 'cru a lightsoff "0 18 * * * /jffs/scripts/ledsoff.sh"' >> /jffs/scripts/services-start
+	#Installs the lightsoff option and sets off at 22 and on at 06
+	4 ) echo 'cru a lightsoff "0 22 * * * /jffs/scripts/ledsoff.sh"' >> /jffs/scripts/services-start
 	echo 'cru a lightson "0 6 * * * /jffs/scripts/ledson.sh"' >> /jffs/scripts/services-start
 	chmod a+rx /jffs/scripts/services-start
 
@@ -63,6 +69,7 @@ until [ "$selection" = "e" ]; do
 	echo "nvram set led_disable=0" >> /jffs/scripts/ledson.sh
 	echo "service restart_leds" >> /jffs/scripts/ledson.sh;;
 
+	#Installs email notifier with extended version working with gmail
 	5 ) wget -c -O /jffs/configs/Equifax_Secure_Certificate_Authority.pem http://www.geotrust.com/resources/root_certificates/certificates/Equifax_Secure_Certificate_Authority.pem --no-check-certificate
 	rm /jffs/scripts/wlan-start
 	wget -c -O /jffs/scripts/wlan-start http://github.com/rallegade/Install-script-asus-ac87u/releases/download/v1/wan-start --no-check-certificate
