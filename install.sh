@@ -71,26 +71,26 @@ until [ "$selection" = "e" ]; do
 
 	#Installs email notifier with extended version working with gmail
 	5 ) wget -c -O /jffs/configs/Equifax_Secure_Certificate_Authority.pem http://www.geotrust.com/resources/root_certificates/certificates/Equifax_Secure_Certificate_Authority.pem --no-check-certificate
-	rm /jffs/scripts/wlan-start
-	wget -c -O /jffs/scripts/wlan-start http://github.com/rallegade/Install-script-asus-ac87u/releases/download/v1/wan-start --no-check-certificate
+	rm /jffs/scripts/wan-start
+	wget -c -O /jffs/scripts/wan-start http://github.com/rallegade/Install-script-asus-ac87u/releases/download/v1/wan-start --no-check-certificate
 
 	echo ""
 	echo -n "Enter the mail the router uses"
 	echo ""
 	read router_email
-	sed -i "s/your-gmail-address/${router_email}/g" /jffs/scripts/wlan-start
+	sed -i "s/your-gmail-address/${router_email}/g" /jffs/scripts/wan-start
 
         echo ""
         echo -n "Enter the the username for the mail the router uses"
         echo ""
         read router_username
-	sed -i "s/your-gmail-username/${router_username}/g" /jffs/scripts/wlan-start
+	sed -i "s/your-gmail-username/${router_username}/g" /jffs/scripts/wan-start
 
         echo ""
         echo -n "Enter the password for the mail the router uses"
         echo ""
         read router_pass
-	sed -i "s/your-gmail-password/${router_pass}/g" /jffs/scripts/wlan-start
+	sed -i "s/your-gmail-password/${router_pass}/g" /jffs/scripts/wan-start
 
         echo ""
         echo -n "Enter the mail you want to recieve these mails on"
