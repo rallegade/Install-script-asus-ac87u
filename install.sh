@@ -96,7 +96,7 @@ until [ "$selection" = "e" ]; do
         echo -n "Enter the mail you want to recieve these mails on"
         echo ""
         read your_email
-	sed -i "s/your-email-address/${your_email}/g" /jffs/scripts/wlan-start;;
+	sed -i "s/your-email-address/${your_email}/g" /jffs/scripts/wan-start;;
 
         e ) exit ;;
         * ) echo "Please enter 1, 2, 3, 4, 5, or e"; press_enter
