@@ -24,7 +24,7 @@ until [ "$selection" = "e" ]; do
     echo -n "Enter selection: "
     read selection
     echo ""
-    case $selection in
+	case $selection in
     
 	#Installs Entware
         1 ) cd /tmp
@@ -91,6 +91,12 @@ until [ "$selection" = "e" ]; do
         echo ""
         read router_pass
 	sed -i "s/your-gmail-password/${router_pass}/g" /jffs/scripts/wan-start
+	
+	    echo ""
+        echo -n "Enter the name you want for your router to have"
+        echo ""
+        read router_name
+	sed -i "s/Your Router/${router_name}/g" /jffs/scripts/wan-start
 
         echo ""
         echo -n "Enter the mail you want to recieve these mails on"
