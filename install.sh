@@ -46,7 +46,7 @@ until [ "$selection" = "e" ]; do
 	cat /jffs/scripts/post-mount-backup /jffs/scripts/post-mount >> /jffs/scripts/post-mount-tmp
 	rm /jffs/scripts/post-mount
 	mv /jffs/scripts/post-mount-tmp /jffs/scripts/post-mount
-	chmod a+rx /jffs/scripts/*;;
+	chmod a+rx /jffs/scripts/post-mount;;
 
 	#Installs dns-crypt on the router
 	3 ) opkg install dnscrypt-proxy fake-hwclock
